@@ -9,6 +9,11 @@ export function CreateEntryPage() {
 
   const handleSubmit = async (input: CreateEntryInput) => {
     clearError();
+    // Request permission here, directly inside the user gesture handler.
+    // iOS blocks Notification.requestPermission() if called outside a tap/click.
+    if (typeof Notification !== 'undefined' && Notification.permission === 'default') {
+      await Notification.requestPermission();
+    }
     const entry = await addEntry(input);
     if (entry) {
       navigate('/entries');

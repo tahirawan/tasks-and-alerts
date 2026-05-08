@@ -18,6 +18,9 @@ export class BrowserNotificationService implements INotificationService {
   async scheduleReminder(entry: Entry): Promise<void> {
     if (!this.isSupported()) return;
     if (entry.reminder.mode === ReminderMode.None) return;
+    // Only schedule if permission is already granted — requesting here would be
+    // outside a user gesture on iOS and the prompt would be silently blocked.
+    if (Notification.permission !== 'granted') return;
 
     const reminderAt = entry.reminder.computedReminderDateTime;
     if (!reminderAt) return;
@@ -27,18 +30,33 @@ export class BrowserNotificationService implements INotificationService {
 
     this.cancelTimer(entry.id);
 
-    const timer = setTimeout(async () => {
-      const granted = await this.requestPermission();
-      if (!granted) return;
-      new Notification(entry.title, {
-        body: entry.notes ?? `Reminder for: ${entry.title}`,
-        icon: '/pwa-192x192.png',
-        tag: entry.id,
-      });
+    const timer = setTimeout(() => {
+      void this.showNotification(entry);
       this.timers.delete(entry.id);
     }, delay);
 
     this.timers.set(entry.id, timer);
+  }
+
+  private async showNotification(entry: Entry): Promise<void> {
+    const opts = {
+      body: entry.notes ?? `Reminder: ${entry.title}`,
+      icon: '/icons/icon.svg',
+      tag: entry.id,
+    };
+
+    // Service-worker notifications are more reliable on mobile than new Notification()
+    if ('serviceWorker' in navigator) {
+      try {
+        const reg = await navigator.serviceWorker.ready;
+        await reg.showNotification(entry.title, opts);
+        return;
+      } catch (_err) {
+        // fall through to basic Notification API
+      }
+    }
+
+    new Notification(entry.title, opts);
   }
 
   async cancelReminder(entryId: string): Promise<void> {

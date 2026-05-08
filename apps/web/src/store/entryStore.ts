@@ -43,6 +43,10 @@ export const useEntryStore = create<EntryStoreState>((set, _get) => ({
     try {
       const entries = await listEntries(repository, filter);
       set({ entries, loading: false });
+      // Re-hydrate in-memory timers for any entries with future reminders.
+      for (const entry of entries) {
+        void notificationService.scheduleReminder(entry);
+      }
     } catch (e) {
       set({ error: String(e), loading: false });
     }
