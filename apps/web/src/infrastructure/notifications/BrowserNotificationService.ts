@@ -1,8 +1,12 @@
 import type { Entry, INotificationService } from '@tasks-and-alerts/shared-types';
-import { ReminderMode } from '@tasks-and-alerts/shared-types';
+import { EntryStatus, ReminderMode } from '@tasks-and-alerts/shared-types';
+
+const MISSED_REMINDER_WINDOW_MS = 2 * 60 * 60 * 1000; // show if missed within 2 hours
 
 export class BrowserNotificationService implements INotificationService {
   private readonly timers = new Map<string, ReturnType<typeof setTimeout>>();
+  // Tracks IDs fired this session so visibilitychange re-checks don't double-notify.
+  private readonly fired = new Set<string>();
 
   isSupported(): boolean {
     return typeof Notification !== 'undefined';
@@ -31,11 +35,36 @@ export class BrowserNotificationService implements INotificationService {
     this.cancelTimer(entry.id);
 
     const timer = setTimeout(() => {
+      this.fired.add(entry.id);
       void this.showNotification(entry);
       this.timers.delete(entry.id);
     }, delay);
 
     this.timers.set(entry.id, timer);
+  }
+
+  // Called on app startup and every time the tab becomes visible.
+  // Fires any reminders whose scheduled time passed while the app was closed/backgrounded.
+  async checkAndFireDue(entries: Entry[]): Promise<void> {
+    if (!this.isSupported() || Notification.permission !== 'granted') return;
+
+    const now = Date.now();
+    const cutoff = now - MISSED_REMINDER_WINDOW_MS;
+
+    for (const entry of entries) {
+      if (entry.status === EntryStatus.Completed) continue;
+      if (entry.reminder.mode === ReminderMode.None) continue;
+      if (this.fired.has(entry.id)) continue;
+
+      const reminderAt = entry.reminder.computedReminderDateTime;
+      if (!reminderAt) continue;
+
+      const t = new Date(reminderAt).getTime();
+      if (t <= now && t >= cutoff) {
+        this.fired.add(entry.id);
+        void this.showNotification(entry);
+      }
+    }
   }
 
   private async showNotification(entry: Entry): Promise<void> {
@@ -61,6 +90,7 @@ export class BrowserNotificationService implements INotificationService {
 
   async cancelReminder(entryId: string): Promise<void> {
     this.cancelTimer(entryId);
+    this.fired.delete(entryId);
   }
 
   async rescheduleReminder(entry: Entry): Promise<void> {

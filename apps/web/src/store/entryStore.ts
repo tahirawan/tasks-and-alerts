@@ -29,10 +29,11 @@ interface EntryStoreState {
   addEntry: (input: CreateEntryInput) => Promise<Entry | null>;
   editEntry: (id: string, patch: UpdateEntryInput) => Promise<Entry | null>;
   removeEntry: (id: string) => Promise<void>;
+  checkMissedReminders: () => void;
   clearError: () => void;
 }
 
-export const useEntryStore = create<EntryStoreState>((set, _get) => ({
+export const useEntryStore = create<EntryStoreState>((set, get) => ({
   entries: [],
   loading: false,
   error: null,
@@ -43,10 +44,11 @@ export const useEntryStore = create<EntryStoreState>((set, _get) => ({
     try {
       const entries = await listEntries(repository, filter);
       set({ entries, loading: false });
-      // Re-hydrate in-memory timers for any entries with future reminders.
+      // Re-hydrate future timers and immediately fire any that fired while app was closed.
       for (const entry of entries) {
         void notificationService.scheduleReminder(entry);
       }
+      void notificationService.checkAndFireDue(entries);
     } catch (e) {
       set({ error: String(e), loading: false });
     }
@@ -100,6 +102,10 @@ export const useEntryStore = create<EntryStoreState>((set, _get) => ({
     } catch (e) {
       set({ error: String(e), loading: false });
     }
+  },
+
+  checkMissedReminders: () => {
+    void notificationService.checkAndFireDue(get().entries);
   },
 
   clearError: () => set({ error: null, validationErrors: [] }),
