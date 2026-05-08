@@ -1,9 +1,5 @@
-import { describe, it, expect, vi, afterEach } from 'vitest';
-import {
-  EntryType,
-  ReminderMode,
-  ReminderOffsetUnit,
-} from '@tasks-and-alerts/shared-types';
+import { describe, it, expect } from 'vitest';
+import { EntryType, ReminderMode, ReminderOffsetUnit } from '@tasks-and-alerts/shared-types';
 import type { CreateEntryInput } from '@tasks-and-alerts/shared-types';
 import { validateCreateEntryInput } from '../domain/entryValidation.js';
 
@@ -27,9 +23,7 @@ describe('validateCreateEntryInput', () => {
   it('fails when title is empty', () => {
     const result = validateCreateEntryInput({ ...validInput, title: '' });
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'title' }),
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'title' }));
   });
 
   it('fails when title is whitespace only', () => {
@@ -40,9 +34,7 @@ describe('validateCreateEntryInput', () => {
   it('fails when title exceeds 200 characters', () => {
     const result = validateCreateEntryInput({ ...validInput, title: 'x'.repeat(201) });
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'title' }),
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'title' }));
   });
 
   it('fails when scheduledDateTime is invalid', () => {
@@ -51,9 +43,7 @@ describe('validateCreateEntryInput', () => {
       scheduledDateTime: 'not-a-date',
     });
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'scheduledDateTime' }),
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'scheduledDateTime' }));
   });
 
   it('passes AtTime reminder with no offset fields', () => {
@@ -88,9 +78,7 @@ describe('validateCreateEntryInput', () => {
       },
     });
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'reminder.offsetUnit' }),
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'reminder.offsetUnit' }));
   });
 
   it('passes valid BeforeTime reminder far in the future', () => {
@@ -109,8 +97,6 @@ describe('validateCreateEntryInput', () => {
   it('fails when notes exceed 2000 characters', () => {
     const result = validateCreateEntryInput({ ...validInput, notes: 'x'.repeat(2001) });
     expect(result.valid).toBe(false);
-    expect(result.errors).toContainEqual(
-      expect.objectContaining({ field: 'notes' }),
-    );
+    expect(result.errors).toContainEqual(expect.objectContaining({ field: 'notes' }));
   });
 });

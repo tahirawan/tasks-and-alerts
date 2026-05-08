@@ -3,6 +3,7 @@
 # Project Vision
 
 A local-first Tasks & Alerts platform designed for:
+
 - Web/PWA
 - Android
 - iOS
@@ -44,22 +45,23 @@ A local-first Tasks & Alerts platform designed for:
 
 project-root/
 ├── apps/
-│   ├── web/
-│   ├── android/
-│   └── ios/
+│ ├── web/
+│ ├── android/
+│ └── ios/
 ├── packages/
-│   ├── shared-core/
-│   ├── shared-types/
-│   ├── shared-ui/
-│   └── shared-utils/
+│ ├── shared-core/
+│ ├── shared-types/
+│ ├── shared-ui/
+│ └── shared-utils/
 └── backend/
-    └── laravel/
+└── laravel/
 
 ---
 
 # Recommended Tech Stack
 
 ## Frontend
+
 - React
 - TypeScript
 - Vite
@@ -68,25 +70,32 @@ project-root/
 - PWA support
 
 ## Cross Platform
+
 - Shared TypeScript packages
 - Capacitor bridge
 
 ## Local Storage
+
 - IndexedDB
 - Dexie.js
 - SQLite for mobile if required
 
 ## Notifications
+
 Initial:
+
 - Local notifications
 
 Future:
+
 - Firebase Cloud Messaging
 - Email notifications
 - SMS notifications
 
 ## Backend
+
 Future:
+
 - Laravel
 - Sanctum authentication
 - Queues/workers

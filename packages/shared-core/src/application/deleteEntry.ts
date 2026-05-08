@@ -1,7 +1,4 @@
-import {
-  type IEntryRepository,
-  type INotificationService,
-} from '@tasks-and-alerts/shared-types';
+import { type IEntryRepository, type INotificationService } from '@tasks-and-alerts/shared-types';
 import { EntryNotFoundError } from './updateEntry.js';
 
 export async function deleteEntry(

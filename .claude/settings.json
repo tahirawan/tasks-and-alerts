@@ -12,7 +12,8 @@
       "Bash(curl -s https://lewisf2001uk.github.io/dlp-cost-estimator/styles.css)",
       "Bash(curl -s https://tahirawan.github.io/personal-health-timeline/assets/index-Cmgmkp8O.css)",
       "Bash(find /Users/tahir.awan/workspace/projects/personal/blood-pressure -name \"*.yml\" -o -name \"*.yaml\" 2>/dev/null)",
-      "Read(//Users/tahir.awan/workspace/projects/personal/blood-pressure/**)"
+      "Read(//Users/tahir.awan/workspace/projects/personal/blood-pressure/**)",
+      "Bash(GITHUB_PAGES=true npm run build --workspace=apps/web)"
     ]
   }
 }

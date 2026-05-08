@@ -12,16 +12,16 @@ Manage tasks and alerts from any device. Offline-first, data never leaves your d
 
 ## Tech Stack
 
-| Layer | Technology |
-|---|---|
-| Frontend | React 19 + TypeScript 5.8 + Vite 6 |
-| Styling | Tailwind CSS 3.4 |
-| State | Zustand 5 |
-| Storage | Dexie.js 4 (IndexedDB) |
-| PWA | vite-plugin-pwa (Workbox) |
-| Cross-platform | Capacitor (Phase 2) |
-| Backend (future) | Laravel + Sanctum |
-| Testing | Vitest 3 |
+| Layer            | Technology                         |
+| ---------------- | ---------------------------------- |
+| Frontend         | React 19 + TypeScript 5.8 + Vite 6 |
+| Styling          | Tailwind CSS 3.4                   |
+| State            | Zustand 5                          |
+| Storage          | Dexie.js 4 (IndexedDB)             |
+| PWA              | vite-plugin-pwa (Workbox)          |
+| Cross-platform   | Capacitor (Phase 2)                |
+| Backend (future) | Laravel + Sanctum                  |
+| Testing          | Vitest 3                           |
 
 ---
 
@@ -90,13 +90,13 @@ Storage and notifications sit behind interfaces (`IEntryRepository`, `INotificat
 
 ## Roadmap
 
-| Phase | Focus |
-|---|---|
-| 1 ✅ | Foundation: monorepo, domain, PWA, local storage, notifications, tests |
-| 2 | Android via Capacitor |
-| 3 | Laravel backend, auth, cloud sync, push/email/SMS notifications |
-| 4 | iOS, multi-device sync, import/export |
-| 5 | AI reminders, calendar integration |
+| Phase | Focus                                                                  |
+| ----- | ---------------------------------------------------------------------- |
+| 1 ✅  | Foundation: monorepo, domain, PWA, local storage, notifications, tests |
+| 2     | Android via Capacitor                                                  |
+| 3     | Laravel backend, auth, cloud sync, push/email/SMS notifications        |
+| 4     | iOS, multi-device sync, import/export                                  |
+| 5     | AI reminders, calendar integration                                     |
 
 ---
 

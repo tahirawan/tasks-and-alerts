@@ -25,7 +25,14 @@ export function CreateEntryPage() {
           className="btn-ghost !min-h-[36px] !w-[36px] !px-0 !rounded-full"
           style={{ color: 'rgba(227,204,255,0.7)' }}
         >
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+          <svg
+            width="16"
+            height="16"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.5}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
@@ -44,11 +51,7 @@ export function CreateEntryPage() {
 
       {/* Glass form panel */}
       <div className="form-panel">
-        <EntryForm
-          onSubmit={handleSubmit}
-          loading={loading}
-          validationErrors={validationErrors}
-        />
+        <EntryForm onSubmit={handleSubmit} loading={loading} validationErrors={validationErrors} />
       </div>
     </div>
   );

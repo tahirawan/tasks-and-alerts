@@ -299,6 +299,28 @@
     font-weight: 600;
   }
 
+  /* ── Entry card delete button ── */
+  .entry-card__delete {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: rgba(94, 59, 148, 0.3);
+    transition: all 160ms ease;
+    margin-top: -2px;
+  }
+  .entry-card__delete:hover {
+    color: #c0223a;
+    background: rgba(192, 34, 58, 0.08);
+    border-color: rgba(192, 34, 58, 0.18);
+  }
+
   /* ── Eyebrow chip ── */
   .eyebrow {
     font-size: 0.74rem;

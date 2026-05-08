@@ -1,0 +1,7 @@
+node_modules/
+dist/
+build/
+coverage/
+*.d.ts
+vite.config.js
+apps/web/vite.config.js

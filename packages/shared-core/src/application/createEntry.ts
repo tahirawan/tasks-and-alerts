@@ -12,9 +12,7 @@ import { validateCreateEntryInput } from '../domain/entryValidation.js';
 import { withComputedReminder } from '../domain/reminderCalculator.js';
 
 export class CreateEntryError extends Error {
-  constructor(
-    public readonly validationErrors: { field: string; message: string }[],
-  ) {
+  constructor(public readonly validationErrors: { field: string; message: string }[]) {
     super('Entry validation failed');
     this.name = 'CreateEntryError';
   }

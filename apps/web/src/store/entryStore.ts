@@ -32,7 +32,7 @@ interface EntryStoreState {
   clearError: () => void;
 }
 
-export const useEntryStore = create<EntryStoreState>((set, get) => ({
+export const useEntryStore = create<EntryStoreState>((set, _get) => ({
   entries: [],
   loading: false,
   error: null,

@@ -37,7 +37,10 @@ export function EntryListPage() {
       {/* Header row */}
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h2 className="font-display font-black text-white" style={{ fontSize: 'clamp(1.35rem, 4vw, 1.75rem)' }}>
+          <h2
+            className="font-display font-black text-white"
+            style={{ fontSize: 'clamp(1.35rem, 4vw, 1.75rem)' }}
+          >
             My Entries
           </h2>
           {entries.length > 0 && (
@@ -47,7 +50,14 @@ export function EntryListPage() {
           )}
         </div>
         <Link to="/entries/new" className="btn-primary">
-          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.8}>
+          <svg
+            width="14"
+            height="14"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2.8}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
           </svg>
           New
@@ -96,7 +106,10 @@ export function EntryListPage() {
       {pending.length > 0 && (
         <section className="space-y-3">
           {entries.length > 0 && done.length > 0 && (
-            <p className="eyebrow" style={{ color: 'rgba(227,204,255,0.45)', marginBottom: '0.6rem' }}>
+            <p
+              className="eyebrow"
+              style={{ color: 'rgba(227,204,255,0.45)', marginBottom: '0.6rem' }}
+            >
               Pending
             </p>
           )}
@@ -114,7 +127,10 @@ export function EntryListPage() {
       {/* Completed entries */}
       {done.length > 0 && (
         <section className="space-y-3">
-          <p className="eyebrow" style={{ color: 'rgba(227,204,255,0.35)', marginBottom: '0.6rem' }}>
+          <p
+            className="eyebrow"
+            style={{ color: 'rgba(227,204,255,0.35)', marginBottom: '0.6rem' }}
+          >
             Completed
           </p>
           {done.map((entry) => (

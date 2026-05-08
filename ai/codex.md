@@ -1,6 +1,7 @@
 # Codex Instructions
 
 Read and follow ALL rules from:
+
 - AGENTS.md
 - ARCHITECTURE.md
 - CODING_STANDARDS.md

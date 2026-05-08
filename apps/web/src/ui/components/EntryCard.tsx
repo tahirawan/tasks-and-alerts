@@ -34,7 +34,14 @@ export function EntryCard({ entry, onComplete, onDelete }: EntryCardProps) {
           }}
         >
           {isDone && (
-            <svg width="11" height="11" fill="none" viewBox="0 0 24 24" stroke="#fff" strokeWidth={3.5}>
+            <svg
+              width="11"
+              height="11"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="#fff"
+              strokeWidth={3.5}
+            >
               <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
             </svg>
           )}
@@ -55,7 +62,9 @@ export function EntryCard({ entry, onComplete, onDelete }: EntryCardProps) {
           >
             {entry.title}
           </span>
-          <span className={entry.type === EntryType.Task ? 'badge badge--task' : 'badge badge--alert'}>
+          <span
+            className={entry.type === EntryType.Task ? 'badge badge--task' : 'badge badge--alert'}
+          >
             {entry.type}
           </span>
         </div>
@@ -77,7 +86,10 @@ export function EntryCard({ entry, onComplete, onDelete }: EntryCardProps) {
           </p>
         )}
 
-        <div className="flex flex-wrap items-center gap-x-3 gap-y-1" style={{ marginTop: '0.4rem' }}>
+        <div
+          className="flex flex-wrap items-center gap-x-3 gap-y-1"
+          style={{ marginTop: '0.4rem' }}
+        >
           <span style={{ fontSize: '0.8rem', color: 'var(--muted)', fontWeight: 600 }}>
             {formatDisplayDateTime(entry.scheduledDateTime)}
           </span>
@@ -103,33 +115,16 @@ export function EntryCard({ entry, onComplete, onDelete }: EntryCardProps) {
       <button
         onClick={() => onDelete(entry.id)}
         aria-label="Delete entry"
-        style={{
-          flexShrink: 0,
-          width: 30,
-          height: 30,
-          borderRadius: '50%',
-          border: '1px solid rgba(192,34,58,0.0)',
-          background: 'transparent',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          cursor: 'pointer',
-          color: 'rgba(94,59,148,0.3)',
-          transition: 'all 160ms ease',
-          marginTop: '-2px',
-        }}
-        onMouseEnter={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = '#c0223a';
-          (e.currentTarget as HTMLButtonElement).style.background = 'rgba(192,34,58,0.08)';
-          (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(192,34,58,0.18)';
-        }}
-        onMouseLeave={(e) => {
-          (e.currentTarget as HTMLButtonElement).style.color = 'rgba(94,59,148,0.3)';
-          (e.currentTarget as HTMLButtonElement).style.background = 'transparent';
-          (e.currentTarget as HTMLButtonElement).style.borderColor = 'rgba(192,34,58,0)';
-        }}
+        className="entry-card__delete"
       >
-        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.2}>
+        <svg
+          width="14"
+          height="14"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2.2}
+        >
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </button>

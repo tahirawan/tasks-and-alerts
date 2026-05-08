@@ -8,8 +8,7 @@ export class AppDatabase extends Dexie {
     super('TasksAndAlertsDB', options);
 
     this.version(1).stores({
-      entries:
-        'id, type, status, scheduledDateTime, createdAt, updatedAt, syncStatus',
+      entries: 'id, type, status, scheduledDateTime, createdAt, updatedAt, syncStatus',
     });
   }
 }

@@ -15,21 +15,25 @@
 # Testing Layers
 
 ## Unit Tests
+
 - Business logic
 - Utilities
 - Reminder calculations
 
 ## Integration Tests
+
 - Storage layer
 - Notification layer
 - Shared packages
 
 ## UI Tests
+
 - Forms
 - Validation
 - Scheduling
 
 ## Edge Case Tests
+
 - Timezone handling
 - Daylight savings
 - Reminder offsets

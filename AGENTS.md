@@ -1,6 +1,7 @@
 # AGENTS.md
 
 ## Purpose
+
 Central AI coordination and governance file for the Tasks & Alerts platform.
 
 ## Global Non-Negotiable Rules
@@ -28,7 +29,9 @@ Central AI coordination and governance file for the Tasks & Alerts platform.
 ---
 
 ## Architecture Agent
+
 Responsibilities:
+
 - Clean architecture
 - SOLID principles
 - Shared domain layer
@@ -38,7 +41,9 @@ Responsibilities:
 - Notification abstraction
 
 ## QA Agent
+
 Responsibilities:
+
 - Unit testing
 - Integration testing
 - Regression prevention
@@ -47,21 +52,27 @@ Responsibilities:
 - Reminder timing validation
 
 ## Refactor Agent
+
 Responsibilities:
+
 - Remove duplication
 - Extract reusable logic
 - Improve maintainability
 - Reduce technical debt
 
 ## Platform Agent
+
 Responsibilities:
+
 - Web/PWA compatibility
 - Android compatibility
 - iOS readiness
 - Shared package usage
 
 ## Backend Agent
+
 Responsibilities:
+
 - Laravel readiness
 - API design
 - Authentication planning
@@ -70,14 +81,18 @@ Responsibilities:
 - SMS/email architecture
 
 ## Security Agent
+
 Responsibilities:
+
 - Secure local storage
 - Future auth compatibility
 - API security
 - Sensitive data protection
 
 ## Release Agent
+
 Responsibilities:
+
 - No breaking changes
 - Changelog management
 - Migration notes

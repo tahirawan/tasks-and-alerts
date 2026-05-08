@@ -1,6 +1,12 @@
 import { describe, it, expect, beforeEach } from 'vitest';
 import { IDBFactory, IDBKeyRange } from 'fake-indexeddb';
-import { EntryType, ReminderMode, EntryStatus, DataSource, SyncStatus } from '@tasks-and-alerts/shared-types';
+import {
+  EntryType,
+  ReminderMode,
+  EntryStatus,
+  DataSource,
+  SyncStatus,
+} from '@tasks-and-alerts/shared-types';
 import type { Entry } from '@tasks-and-alerts/shared-types';
 import { LocalEntryRepository } from '../infrastructure/storage/LocalEntryRepository.js';
 import { AppDatabase } from '../infrastructure/storage/AppDatabase.js';

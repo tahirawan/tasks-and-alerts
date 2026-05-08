@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import type { CreateEntryInput } from '@tasks-and-alerts/shared-types';
 import { EntryType, ReminderMode, ReminderOffsetUnit } from '@tasks-and-alerts/shared-types';
 import { combineDateAndTime, todayDateString } from '@tasks-and-alerts/shared-utils';
@@ -22,8 +22,7 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
   const [offsetValue, setOffsetValue] = useState(10);
   const [offsetUnit, setOffsetUnit] = useState<ReminderOffsetUnit>(ReminderOffsetUnit.Minutes);
 
-  const fieldError = (field: string) =>
-    validationErrors.find((e) => e.field === field)?.message;
+  const fieldError = (field: string) => validationErrors.find((e) => e.field === field)?.message;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,8 +45,11 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
   };
 
   return (
-    <form onSubmit={handleSubmit} noValidate style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}>
-
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      style={{ display: 'flex', flexDirection: 'column', gap: '1.35rem' }}
+    >
       {/* Type selector */}
       <div>
         <label className="field-label">Type</label>
@@ -88,7 +90,9 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
 
       {/* Notes */}
       <div>
-        <label htmlFor="notes" className="field-label">Notes</label>
+        <label htmlFor="notes" className="field-label">
+          Notes
+        </label>
         <textarea
           id="notes"
           className="field-input"
@@ -182,7 +186,9 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
         </div>
 
         {reminderMode === ReminderMode.BeforeTime && (
-          <div style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', marginTop: '0.75rem' }}>
+          <div
+            style={{ display: 'flex', gap: '0.6rem', alignItems: 'center', marginTop: '0.75rem' }}
+          >
             <input
               type="number"
               min={1}
@@ -203,7 +209,14 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
                 </option>
               ))}
             </select>
-            <span style={{ fontSize: '0.9rem', color: 'var(--muted)', fontWeight: 600, whiteSpace: 'nowrap' }}>
+            <span
+              style={{
+                fontSize: '0.9rem',
+                color: 'var(--muted)',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+              }}
+            >
               before
             </span>
           </div>

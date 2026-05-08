@@ -36,6 +36,4 @@ export type CreateEntryInput = Omit<
   status?: EntryStatus;
 };
 
-export type UpdateEntryInput = Partial<
-  Omit<Entry, 'id' | 'createdAt' | 'source' | 'syncStatus'>
->;
+export type UpdateEntryInput = Partial<Omit<Entry, 'id' | 'createdAt' | 'source' | 'syncStatus'>>;

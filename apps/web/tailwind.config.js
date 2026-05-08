@@ -16,8 +16,22 @@ export default {
         'border-strong': 'rgba(94,59,148,0.28)',
       },
       fontFamily: {
-        sans: ['"Avenir Next"', '"Trebuchet MS"', '"Segoe UI"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
-        display: ['"Avenir Next Condensed"', '"Trebuchet MS"', '"Segoe UI"', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: [
+          '"Avenir Next"',
+          '"Trebuchet MS"',
+          '"Segoe UI"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+        display: [
+          '"Avenir Next Condensed"',
+          '"Trebuchet MS"',
+          '"Segoe UI"',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
         mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace'],
       },
       borderRadius: {
