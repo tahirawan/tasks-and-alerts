@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm --version)",
+      "Bash(pnpm --version)",
+      "Bash(yarn --version)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "WebFetch(domain:tahirawan.github.io)",
+      "WebFetch(domain:lewisf2001uk.github.io)",
+      "Bash(curl -s https://lewisf2001uk.github.io/dlp-cost-estimator/)",
+      "Bash(curl -s https://lewisf2001uk.github.io/dlp-cost-estimator/styles.css)",
+      "Bash(curl -s https://tahirawan.github.io/personal-health-timeline/assets/index-Cmgmkp8O.css)",
+      "Bash(find /Users/tahir.awan/workspace/projects/personal/blood-pressure -name \"*.yml\" -o -name \"*.yaml\" 2>/dev/null)",
+      "Read(//Users/tahir.awan/workspace/projects/personal/blood-pressure/**)"
+    ]
+  }
+}
