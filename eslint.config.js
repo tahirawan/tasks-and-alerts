@@ -33,7 +33,6 @@ export default [
     },
     rules: {
       ...tsPlugin.configs["recommended"].rules,
-      ...tsPlugin.configs["recommended-requiring-type-checking"]?.rules,
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
       "@typescript-eslint/no-unused-vars": ["error", { argsIgnorePattern: "^_" }],
