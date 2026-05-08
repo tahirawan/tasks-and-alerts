@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { CreateEntryInput } from '@tasks-and-alerts/shared-types';
 import { EntryType, ReminderMode, ReminderOffsetUnit } from '@tasks-and-alerts/shared-types';
-import { combineDateAndTime, todayDateString } from '@tasks-and-alerts/shared-utils';
+import { combineDateAndTime } from '@tasks-and-alerts/shared-utils';
 
 interface EntryFormProps {
   onSubmit: (input: CreateEntryInput) => void;
@@ -9,15 +9,27 @@ interface EntryFormProps {
   validationErrors: { field: string; message: string }[];
 }
 
-export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProps) {
-  const today = todayDateString();
+function currentDateString(): string {
+  const now = new Date();
+  const y = now.getFullYear();
+  const m = String(now.getMonth() + 1).padStart(2, '0');
+  const d = String(now.getDate()).padStart(2, '0');
+  return `${y}-${m}-${d}`;
+}
 
+function currentTimeString(): string {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2, '0');
+  const min = String(now.getMinutes()).padStart(2, '0');
+  return `${h}:${min}`;
+}
+
+export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProps) {
   const [type, setType] = useState<EntryType>(EntryType.Task);
   const [title, setTitle] = useState('');
   const [notes, setNotes] = useState('');
-  const [isTodayOnly, setIsTodayOnly] = useState(true);
-  const [dateStr, setDateStr] = useState(today);
-  const [timeStr, setTimeStr] = useState('09:00');
+  const [dateStr, setDateStr] = useState(currentDateString);
+  const [timeStr, setTimeStr] = useState(currentTimeString);
   const [reminderMode, setReminderMode] = useState<ReminderMode>(ReminderMode.AtTime);
   const [offsetValue, setOffsetValue] = useState(10);
   const [offsetUnit, setOffsetUnit] = useState<ReminderOffsetUnit>(ReminderOffsetUnit.Minutes);
@@ -26,8 +38,7 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const scheduledDate = isTodayOnly ? today : dateStr;
-    const scheduledDateTime = combineDateAndTime(scheduledDate, timeStr);
+    const scheduledDateTime = combineDateAndTime(dateStr, timeStr);
     const trimmedNotes = notes.trim();
 
     const input: CreateEntryInput = {
@@ -35,7 +46,7 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
       title: title.trim(),
       ...(trimmedNotes ? { notes: trimmedNotes } : {}),
       scheduledDateTime,
-      isTodayOnlyTimeEntry: isTodayOnly,
+      isTodayOnlyTimeEntry: false,
       reminder: {
         mode: reminderMode,
         ...(reminderMode === ReminderMode.BeforeTime ? { offsetValue, offsetUnit } : {}),
@@ -106,51 +117,25 @@ export function EntryForm({ onSubmit, loading, validationErrors }: EntryFormProp
 
       <hr className="divider" />
 
-      {/* When */}
+      {/* Date & Time */}
       <div>
-        <label className="field-label">When</label>
-
-        <label
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.6rem',
-            marginBottom: '0.75rem',
-            cursor: 'pointer',
-            fontSize: '0.9rem',
-            fontWeight: 600,
-            color: 'var(--ink)',
-          }}
-        >
-          <input
-            type="checkbox"
-            checked={isTodayOnly}
-            onChange={(e) => setIsTodayOnly(e.target.checked)}
-            style={{ accentColor: 'var(--accent)', width: 16, height: 16, cursor: 'pointer' }}
-          />
-          Today only (time-only entry)
-        </label>
-
+        <label className="field-label">Date &amp; Time</label>
         <div style={{ display: 'flex', gap: '0.6rem' }}>
-          {!isTodayOnly && (
-            <input
-              type="date"
-              className="field-input"
-              style={{ flex: 1 }}
-              value={dateStr}
-              min={today}
-              onChange={(e) => setDateStr(e.target.value)}
-            />
-          )}
+          <input
+            type="date"
+            className="field-input"
+            style={{ flex: 1 }}
+            value={dateStr}
+            onChange={(e) => setDateStr(e.target.value)}
+          />
           <input
             type="time"
             className="field-input"
-            style={{ flex: isTodayOnly ? 1 : '0 0 130px' }}
+            style={{ flex: '0 0 130px' }}
             value={timeStr}
             onChange={(e) => setTimeStr(e.target.value)}
           />
         </div>
-
         {fieldError('scheduledDateTime') && (
           <p className="field-error">{fieldError('scheduledDateTime')}</p>
         )}
